@@ -7,7 +7,7 @@ pipeline {
     environment {
         COMPOSE_PROJECT_NAME = 'student-service-queue'
     }
-    
+
     options {
         timestamps()
     }
@@ -39,20 +39,33 @@ pipeline {
         stage('Health Check') {
             steps {
                 sh '''
+                    set -e
+
+                    echo "Memeriksa kesehatan Backend API..."
+
                     for i in $(seq 1 10); do
-                        if curl -fsS http://localhost:5001/health; then
+                        if docker compose exec -T backend python -c "import urllib.request; print(urllib.request.urlopen('http://127.0.0.1:5001/health', timeout=3).read().decode())"; then
                             echo "Backend API aktif."
-                            exit 0
+                            break
                         fi
+
+                        if [ "$i" -eq 10 ]; then
+                            echo "Backend gagal memberikan respons."
+                            docker compose logs --tail=50 backend
+                            exit 1
+                        fi
+
                         echo "Menunggu backend aktif..."
                         sleep 3
                     done
 
-                    echo "Backend gagal memberikan respons."
-                    exit 1
-                '''
+                    echo "Memeriksa kesehatan Frontend..."
 
-                sh 'curl -fsS http://localhost:8081'
+                    docker compose exec -T frontend wget -q -O /dev/null http://127.0.0.1/
+
+                    echo "Frontend berhasil diakses."
+                    echo "Semua Health Check berhasil."
+                '''
             }
         }
     }
