@@ -140,7 +140,7 @@ Berdasarkan pengujian deployment, diperoleh hasil sebagai berikut:
 - Frontend berhasil diakses melalui browser dengan HTTP Status Code `200 OK`.
 - Jenkins Stage View menunjukkan seluruh tahapan pipeline berhasil dijalankan pada build yang sukses.
 
-## 9. Author
+## 9. Author (Anggota Kelompok(E))
 
 **Rusda Ulva_101012300162**
 **Eirene Kezia_101012300168**
@@ -149,6 +149,5 @@ Berdasarkan pengujian deployment, diperoleh hasil sebagai berikut:
 Repository: [student-service-queue](https://github.com/rurusda/student-service-queue)
 
 ## Webhook Testing
-
 Pengujian GitHub Webhook berhasil dilakukan.
 Perubahan ini digunakan untuk menguji otomatisasi CI/CD melalui Jenkins.
