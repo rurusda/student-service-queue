@@ -4,6 +4,10 @@ pipeline {
         label 'docker-agent'
     }
 
+    environment {
+        COMPOSE_PROJECT_NAME = 'student-service-queue'
+    }
+    
     options {
         timestamps()
     }
