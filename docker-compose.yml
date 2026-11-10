@@ -1,0 +1,38 @@
+
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: student-service-backend
+    ports:
+      - "5001:5001"
+    environment:
+      PORT: 5001
+      DATA_DIR: /var/lib/backend_data
+    volumes:
+      - queue-db-data:/var/lib/backend_data
+    networks:
+      - app-net
+    restart: unless-stopped
+
+  frontend:
+    image: nginx:alpine
+    container_name: student-service-frontend
+    ports:
+      - "8081:80"
+    volumes:
+      - ./frontend:/usr/share/nginx/html:ro
+    networks:
+      - app-net
+    depends_on:
+      - backend
+    restart: unless-stopped
+
+networks:
+  app-net:
+    driver: bridge
+
+volumes:
+  queue-db-data:
+    name: queue-db-data

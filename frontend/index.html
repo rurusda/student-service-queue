@@ -1,0 +1,199 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Service Queue System</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header class="topbar">
+        <div class="brand">
+            <div class="brand-icon">S</div>
+            <div>
+                <h1>Student Service</h1>
+                <p>QUEUE MANAGEMENT SYSTEM</p>
+            </div>
+        </div>
+
+        <div class="topbar-info">
+            <span class="status-dot"></span>
+            <span>System Online</span>
+        </div>
+    </header>
+
+    <main class="container">
+
+        <section class="welcome">
+            <div>
+                <p class="eyebrow">UNIVERSITY SERVICE CENTER</p>
+                <h2>Student Service Queue</h2>
+                <p>Selamat datang! Ambil nomor antrean dan dapatkan layanan
+                    administrasi mahasiswa dengan lebih mudah.</p>
+            </div>
+            <div class="welcome-icon">🎓</div>
+        </section>
+
+        <section class="stats">
+            <div class="stat-card">
+                <div class="stat-icon blue">👥</div>
+                <div>
+                    <p>Total Antrean</p>
+                    <h3 id="totalQueue">0</h3>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon orange">⏳</div>
+                <div>
+                    <p>Menunggu</p>
+                    <h3 id="waitingQueue">0</h3>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon green">🎫</div>
+                <div>
+                    <p>Nomor Terakhir</p>
+                    <h3 id="lastNumber">-</h3>
+                </div>
+            </div>
+        </section>
+
+        <section class="content-grid">
+
+            <!-- FORM MAHASISWA -->
+            <div class="panel">
+                <div class="panel-heading">
+                    <div>
+                        <p class="eyebrow">REGISTRATION</p>
+                        <h3>Ambil Nomor Antrean</h3>
+                    </div>
+                    <span class="heading-icon">📝</span>
+                </div>
+
+                <form id="queueForm">
+                    <div class="form-group">
+                        <label for="name">Nama Lengkap</label>
+                        <input
+                            type="text"
+                            id="name"
+                            placeholder="Masukkan nama lengkap"
+                            maxlength="100"
+                            required
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="nim">Nomor Induk Mahasiswa (NIM)</label>
+                        <input
+                            type="text"
+                            id="nim"
+                            placeholder="Masukkan NIM"
+                            maxlength="30"
+                            required
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="service">Jenis Layanan</label>
+                        <select id="service" required>
+                            <option value="">Pilih jenis layanan</option>
+                            <option value="Surat Aktif Kuliah">Surat Aktif Kuliah</option>
+                            <option value="Konsultasi Akademik">Konsultasi Akademik</option>
+                            <option value="Administrasi Akademik">Administrasi Akademik</option>
+                            <option value="Legalisir Dokumen">Legalisir Dokumen</option>
+                            <option value="Layanan Beasiswa">Layanan Beasiswa</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" class="btn-primary" id="submitButton">
+                        Ambil Nomor Antrean →
+                    </button>
+                </form>
+
+                <div id="resultBox" class="result-box hidden">
+                    <p>Nomor antrean berhasil dibuat!</p>
+                    <h2 id="resultNumber">A001</h2>
+                    <span id="resultName"></span>
+                </div>
+
+                <div id="formMessage" class="message hidden"></div>
+            </div>
+
+            <!-- INFORMASI ANTREAN -->
+            <div class="panel">
+                <div class="panel-heading">
+                    <div>
+                        <p class="eyebrow">QUEUE INFORMATION</p>
+                        <h3>Informasi Antrean</h3>
+                    </div>
+                    <span class="heading-icon">📢</span>
+                </div>
+
+                <div class="current-queue">
+                    <p>Antrean Selanjutnya</p>
+                    <h2 id="nextQueue">-</h2>
+                    <span>Silakan menunggu giliran pelayanan</span>
+                </div>
+
+                <div class="info-note">
+                    <strong>Informasi:</strong>
+                    <p>Pastikan data yang dimasukkan sudah benar.
+                        Simpan nomor antrean untuk memudahkan proses pelayanan.</p>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- DASHBOARD PETUGAS -->
+        <section class="panel queue-panel">
+            <div class="panel-heading queue-heading">
+                <div>
+                    <p class="eyebrow">ADMINISTRATION</p>
+                    <h3>Dashboard Petugas</h3>
+                    <p class="panel-description">
+                        Daftar mahasiswa yang sedang menunggu pelayanan.
+                    </p>
+                </div>
+
+                <button class="btn-refresh" id="refreshButton">
+                    ↻ Refresh
+                </button>
+            </div>
+
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>No. Antrean</th>
+                            <th>Nama Mahasiswa</th>
+                            <th>NIM</th>
+                            <th>Jenis Layanan</th>
+                            <th>Status</th>
+                            <th>Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody id="queueTable">
+                        <tr>
+                            <td colspan="6" class="empty-state">
+                                Memuat data antrean...
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <footer>
+            <p>© 2026 Student Service Queue System</p>
+            <p>Cloud Computing – UTS Project</p>
+        </footer>
+
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
