@@ -17,12 +17,12 @@ services:
     restart: unless-stopped
 
   frontend:
-    image: nginx:alpine
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
     container_name: student-service-frontend
     ports:
       - "8081:80"
-    volumes:
-      - ./frontend:/usr/share/nginx/html:ro
     networks:
       - app-net
     depends_on:
