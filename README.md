@@ -142,9 +142,9 @@ Berdasarkan pengujian deployment, diperoleh hasil sebagai berikut:
 
 ## 9. Author (Anggota Kelompok(E))
 
-**Rusda Ulva_101012300162**
-**Eirene Kezia_101012300168**
-**Muhamad Malik Hasbiya_101012300387**
+**- Rusda Ulva_101012300162**
+**- Eirene Kezia_101012300168**
+**- Muhamad Malik Hasbiya_101012300387**
 
 Repository: [student-service-queue](https://github.com/rurusda/student-service-queue)
 
