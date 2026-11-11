@@ -151,3 +151,8 @@ Repository: [student-service-queue](https://github.com/rurusda/student-service-q
 ## Webhook Testing
 Pengujian GitHub Webhook berhasil dilakukan.
 Perubahan ini digunakan untuk menguji otomatisasi CI/CD melalui Jenkins.
+
+## CI/CD Automation Testing
+
+Project Student Service Queue.
+Pengujian otomatisasi CI/CD melalui GitHub Webhook dan Jenkins.
